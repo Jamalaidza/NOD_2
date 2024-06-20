@@ -3,7 +3,7 @@ name: Run Google Tests
 on:
   push:
     branches:
-      - main  # Укажите здесь вашу основную ветку
+      - main
 
 jobs:
   build:
@@ -24,4 +24,4 @@ jobs:
     - name: Run tests
       run: |
         cd build
-        ./test_B
+        ./tests/test_B
