@@ -1,23 +1,32 @@
 name: NOD_
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        cxx: [gcc-9]  # замените на нужную вам версию компилятора
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: Set up CMake
-      uses: lukka/run-cmake@v1
-      with:
-        cmakeListsTxtPath: ../../CMakeLists.txt
-        buildDirectory: build
+      uses: lukka/get-cmake@v1
 
-    - name: Build project
+    - name: Set up GTest
+      run: sudo apt-get install libgtest-dev
+
+    - name: Configure
+      run: cmake -Bbuild -S.
+
+    - name: Build
       run: cmake --build build
 
     - name: Run tests
-      run: ../../build/tests/test_B
+      run: ./build/tests/test_B  # замените на исполняемый файл вашего теста
