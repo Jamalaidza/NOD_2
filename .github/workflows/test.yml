@@ -19,7 +19,6 @@ jobs:
         buildDirectory: 'build'
 
     - name: Build
-      run: cmake -H. -Bbuild
       run: cmake --build build
 
     - name: Run tests
