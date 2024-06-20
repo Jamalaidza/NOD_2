@@ -1,27 +1,23 @@
 name: NOD_
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Set up CMake
-      uses: lukka/run-cmake@v2
+      uses: lukka/run-cmake@v1
       with:
-        cmakeListsOrSettingsJson: 'CMakeLists.txt'
-        buildDirectory: 'build'
+        cmakeListsOrSettingsJson: ../../CMakeLists.txt
+        buildType: Release
 
-    - name: Build
-      run: cmake --build build
+    - name: Build project
+      run: cmake --build build-directory
 
     - name: Run tests
-      run: |
-        cd build
-        ./tests/test_B
+      run: ../../build/tests/test_B
