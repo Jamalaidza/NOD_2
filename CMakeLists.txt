@@ -9,4 +9,4 @@ add_subdirectory(tests)
 add_executable(main src/main.cpp src/NOD.cpp)
 target_link_libraries(main NOD_B)
 
-#asd
+
